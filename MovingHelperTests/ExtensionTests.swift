@@ -13,7 +13,6 @@ import MovingHelper
 
 class ExtensionTests: XCTestCase {
   
-  //MARK: Dictionary
   
   func testDictionarySafeString() {
     let goodKey = "good_key"
