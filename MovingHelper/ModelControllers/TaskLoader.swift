@@ -40,13 +40,25 @@ public struct TaskLoader {
   }
   
   private static func tasksFromData(data: NSData) -> [Task]? {
-    var arrayOfTaskDictionaries: [NSDictionary]!
+//    do {
+//      let arrayOfTaskDictionaries = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [NSDictionary]
+//      return Task.tasksFromArrayOfJSONDictionaries(arrayOfTaskDictionaries!)
+//    } catch let error as NSError {
+//      NSLog("Error loading data: " + error.description)
+//      return nil
+//    }
     do {
-      arrayOfTaskDictionaries = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [NSDictionary]
+//    let error = NSErrorPointer()
+    if let arrayOfTaskDictionaries = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [NSDictionary] {
       return Task.tasksFromArrayOfJSONDictionaries(arrayOfTaskDictionaries)
-    } catch let error as NSError {
-      NSLog("Error loading data: " + error.description)
+    } else {
+      NSLog("Error loading data")
       return nil
     }
+    } catch {
+      NSLog("Error JSONSerializing data")
+      return nil
+    }
+    
   }
 }
